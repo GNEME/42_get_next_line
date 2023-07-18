@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggneme <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 23:09:59 by ggneme            #+#    #+#             */
-/*   Updated: 2022/11/08 15:46:20 by ggneme           ###   ########.fr       */
+/*   Created: 2022/11/08 15:35:28 by ggneme            #+#    #+#             */
+/*   Updated: 2022/11/08 15:38:22 by ggneme           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,27 @@ static void	my_free(char **s)
 
 char	*get_next_line(int fd)
 {
-	static char	*s1;
+	static char	*s1[MAX_FD];
 	char		*result;
 	int			nbr;
 	char		*buf;
 
-	if (!s1)
-		s1 = ft_strdup("");
+	if (!s1[fd])
+		s1[fd] = ft_strdup("");
 	result = 0;
-	nbr = my_read(fd, &buf, &result, &s1);
+	nbr = my_read(fd, &buf, &result, &s1[fd]);
 	if (nbr == -1)
-		my_free(&s1);
+		my_free(&s1[fd]);
 	else if (nbr == 0)
 	{
-		ft_traitements(0, &result, &s1);
-		if (!result && *s1 != '\0')
+		ft_traitements(0, &result, &s1[fd]);
+		if (!result && *s1[fd] != '\0')
 		{
-			result = ft_strdup(s1);
-			my_free(&s1);
+			result = ft_strdup(s1[fd]);
+			my_free(&s1[fd]);
 		}
-		else if (!result && *s1 == '\0')
-			my_free(&s1);
+		else if (!result && *s1[fd] == '\0')
+			my_free(&s1[fd]);
 	}
 	return (result);
 }

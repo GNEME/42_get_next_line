@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggneme <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 00:01:20 by ggneme            #+#    #+#             */
-/*   Updated: 2022/11/05 23:05:22 by ggneme           ###   ########.fr       */
+/*   Created: 2022/11/08 15:33:46 by ggneme            #+#    #+#             */
+/*   Updated: 2022/11/08 15:34:57 by ggneme           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-static size_t	ft_strlcpy_mod(char *dest, const char *src, size_t size)
+static void	ft_strlcpy_mod(char *dest, const char *src, size_t size)
 {
 	size_t	n;
 
@@ -36,26 +36,22 @@ static size_t	ft_strlcpy_mod(char *dest, const char *src, size_t size)
 		}
 		dest[n] = '\0';
 	}
-	return (0);
 }
 
-static size_t	ft_strlcat_mod(char *dest, const char *src, size_t size)
+static void	ft_strlcat_mod(char *dest, const char *src, size_t size)
 {
 	size_t	n;
 	size_t	i;
-	size_t	len;
 
 	if (size == 0 && !dest)
-		return (ft_strlen(src));
+		return ;
 	i = ft_strlen(dest);
-	len = i;
 	n = 0;
 	if (size <= i)
-		return (size + ft_strlen(src));
+		return ;
 	while (src[n] != '\0' && i < size - 1)
 		dest[i++] = src[n++];
 	dest[i] = '\0';
-	return (0);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
